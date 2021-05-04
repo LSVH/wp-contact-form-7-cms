@@ -1,0 +1,20 @@
+{
+    "name": "lsvh/wp-contact-form-7-cms",
+    "description": "Classify an WordPress user.",
+    "type": "project",
+    "license": "GPLv2 or later",
+    "authors": [
+        {
+            "name": "Luuk S. van Houdt",
+            "email": "info@lsvh.org"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "LSVH\\WordPress\\Plugin\\Wpcf7CMS\\": "src/"
+        }
+    }
+}
