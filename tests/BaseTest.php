@@ -22,7 +22,7 @@ abstract class BaseTest extends TestCase
             )
         );
 
-        /** Make WordPress think we're making a GET request */
+        /** Make WordPress think we're sending a GET request */
         $_SERVER['REQUEST_METHOD'] = "GET";
 
         /** Loads the WordPress Environment and Template */
