@@ -3,10 +3,10 @@
 /**
  * Plugin Name: Contact Form 7: CMS Integration
  * Plugin URI: https://github.com/LSVH/wp-contact-form-7-cms
- * Description: Classify an WordPress user.
- * Version: 0.1.1
+ * Description: Manage entities of the CMS (WordPress) via Contact Form 7.
+ * Version: %%VERSION%%
  * Requires at least: 5.0
- * Requires PHP: 7.0
+ * Requires PHP: 7.3.0
  * Author: LSVH
  * Author URI: https://lsvh.org/
  * License: GPLv2 or later

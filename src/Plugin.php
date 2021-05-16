@@ -4,15 +4,28 @@ namespace LSVH\WordPress\Plugin\Wpcf7CMS;
 
 class Plugin
 {
+    private $dir;
     private $name;
     private $domain;
     private $options;
 
-    public function __construct(array $data)
+    public function __construct(string $file)
     {
+        $this->dir = untrailingslashit(dirname($file));
+
+        if (!function_exists('get_plugin_data')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+        $data = get_plugin_data($file, false);
+
         $this->name = array_key_exists('Name', $data) ? $data['Name'] : 'default';
         $this->domain = array_key_exists('TextDomain', $data) ? $data['TextDomain'] : 'default';
         $this->options = get_option(esc_sql($this->domain), []);
+    }
+
+    public function getDir()
+    {
+        return $this->dir;
     }
 
     public function getName()

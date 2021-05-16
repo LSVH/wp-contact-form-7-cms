@@ -4,9 +4,9 @@ Contributors: lsvh
 Donate link: https://github.com/LSVH/wp-contact-form-7-cms  
 Tags: users, administration  
 Requires at least: 5.0  
-Requires PHP: 7.2.5  
+Requires PHP: 7.3.0  
 Tested up to: 5.7  
-Stable tag: 0.1.1  
+Stable tag: %%VERSION%%  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,4 +78,6 @@ answer
 
 Please submit issues or your contributions for this plugin on the [Github Repository](https://github.com/LSVH/wp-contact-form-7-cms).
 
-<!-- changelog -->
+## Changelog
+
+%%CHANGELOG%%
