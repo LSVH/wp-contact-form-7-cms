@@ -32,34 +32,55 @@ All available actions can only be executed by users whom have the right capabili
 
 ### Usage
 
-This section describes how to install and configure the plugin.
+This section describes how to install and configure the plugin. The configuration differs per entity and will be further specified in the section dedicated to it. In general this is how you can use this plugin:
 
 1. Install and activate the [Contact Form 7](https://wordpress.org/plugins/contact-form-7/) plugin if you didn't already.
-2. Add the plugin to your wordpress environment.
+2. Add the plugin to your WordPress environment.
 3. Activate the plugin through the 'Plugins' menu in WordPress.
 4. Add or edit an CF7 form by going to forms page by clicking on the 'Contact' menu item. 
-5. Configure your form inputs to make use of the `name`'s as described in the table below.
-6. Use the same name in combination with the `default:` attribute to load in the default value (note: this only works if an already existing object is being modified).
+5. Make use one of the special field names, as described in the entity table(s) below, to configure your input in the CF7 form editor.
 7. In the 'Additional Settings' tab of the form editor add one of the included [features](#features) to enable the corresponding action's functionality.
+
+### Default values
+
+Note that CF7 already partly supports loading default values:
+
+- [Getting default values from the context](https://contactform7.com/getting-default-values-from-the-context/)
+- [Setting default values to the logged-in user](https://contactform7.com/setting-default-values-to-the-logged-in-user/)
+- [Getting default values from shortcode attributes](https://contactform7.com/getting-default-values-from-shortcode-attributes/)
+
+#### Data sources
+
+Note that the creator of the CF7 plugin also created another plugin called "Listo". This plugin supports several data sources to be loaded into inputs with options (checkboxes, radio buttons and select menus). Read more about it [here](https://contactform7.com/listo/) to understand how to use it.
+
+The source names in the table below can be used in combination with the `data` key to load in a particular data source into the options of the input, for example: 
+
+```
+[checkboxes my-input data:<source_name>]
+```
+
+Where `<source_name>` is one of the values from the table below. 
+| Source name      | Description
+|------------------|------------
+| `wp_post?<args>` | Get a list of posts, labeled with the `post_title` attribute. Customize the [query string](https://developer.wordpress.org/reference/functions/wp_parse_args/) `<args>` using any [WP_Query parameter](https://developer.wordpress.org/reference/classes/wp_query/#parameters) that doesn't require square brackets (`[`, `]`). For example to get a list of all pages you can use `[select my-input data:wp_post?post_type=page]`.
+| `wp_term?<args>` | Get a list of terms, labeled with the `name` attribute. Customize the [query string](https://developer.wordpress.org/reference/functions/wp_parse_args/) `<args>` using any [WP_Term_Query parameter](https://developer.wordpress.org/reference/classes/wp_term_query/__construct/#parameters) that doesn't require square brackets (`[`, `]`). For example to get a list of all categories you can use `[select my-input data:wp_term?post_type=category]`.
 
 #### User entity
 
-The fields in the table below only work with the feature: `edit_profile`.
+The field names in the entity table below only work when you enable the `edit_profile` feature in the form. When applied to an input's name, then the plugin will update the corresponding attribute of the currently logged-in user after submission of the form.
 
-| Field           | Description                                                                                                                                |
-|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| `user_login`    | The user's login username. This field cannot be modified.                                                                                  |
-| `user_nicename` | The URL-friendly user name.                                                                                                                |
-| `user_pass`     | The plain-text user password.                                                                                                              |
-| `user_url`      | The user URL.                                                                                                                              |
-| `user_email`    | The user email address.                                                                                                                    |
-| `display_name`  | The user's display name. Default is the user's username.                                                                                   |
-| `nickname`      | The user's nickname. Default is the user's username.                                                                                       |
-| `first_name`    | The user's first name. For new users, will be used to build the first part of the user's display name if  `display_name` is not specified. |
-| `last_name`     | The user's last name. For new users, will be used to build the second part of the user's display name if  `display_name` is not specified. |
-| `description`   | The user's biographical description.                                                                                                       |
-| `locale`        | User's locale. Default empty.                                                                                                              |
-| `user_meta_*`   | Any custom user meta data, where `*` is the key name of the meta data.                                                                     |
+| Field name                 | Description
+|----------------------------|------------
+| `cms_user_nicename`        | The URL-friendly user name.
+| `cms_user_pass`            | The user's password.
+| `cms_user_url`             | The user's URL.
+| `cms_user_email`           | The user's email address.
+| `cms_user_display_name`    | The user's display name. Default is the user's username.
+| `cms_user_nickname`        | The user's nickname. Default is the user's username.
+| `cms_user_first_name`      | The user's first name.
+| `cms_user_last_name`       | The user's last name.
+| `cms_user_description`     | The user's biographical description.
+| `cms_user_meta_<key_name>` | Any custom user meta data, where `<key_name>` is the key name of the meta data.
 
 ## Screenshots
 

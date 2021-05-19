@@ -1,6 +1,6 @@
 <?php
 
-namespace LSVH\WordPress\Plugin\Wpcf7CMS\Components;
+namespace LSVH\WordPress\Plugin\WPCF7CMS\Components;
 
 interface Component
 {

@@ -1,8 +1,10 @@
 <?php
 
-namespace LSVH\WordPress\Plugin\Wpcf7CMS;
+namespace LSVH\WordPress\Plugin\WPCF7CMS;
 
-use LSVH\WordPress\Plugin\Wpcf7CMS\Components\Modules;
+use LSVH\WordPress\Plugin\WPCF7CMS\Components\Handlers;
+use LSVH\WordPress\Plugin\WPCF7CMS\Components\Modules;
+use LSVH\WordPress\Plugin\WPCF7CMS\Components\Sources;
 
 class Bootstrap
 {
@@ -23,6 +25,9 @@ class Bootstrap
         $components = [
             // Remove after PR's are accepted: https://github.com/takayukister/contact-form-7/pulls?q=416+417
             Modules::class,
+
+            Handlers::class,
+            Sources::class,
         ];
 
         foreach ($components as $component) {

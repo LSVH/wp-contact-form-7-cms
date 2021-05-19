@@ -1,12 +1,12 @@
 <?php
 
-namespace LSVH\WordPress\Plugin\Wpcf7CMS\Components;
+namespace LSVH\WordPress\Plugin\WPCF7CMS\Components;
 
 class Modules extends BaseComponent
 {
     public function install()
     {
-        $dir = $this->plugin->getDir() . 'src/Modules';
+        $dir = $this->plugin->getDir() . '/src/Modules';
         $this->loadModulesInDir($dir);
     }
 
@@ -17,8 +17,8 @@ class Modules extends BaseComponent
         }
 
         foreach (scandir($dir) as $file) {
-            if (file_exists($file) && endsWith($file, '.php')) {
-                include_once $file;
+            if (file_exists($dir . '/' . $file) && $this->endsWith($file, '.php')) {
+                include_once $dir . '/' . $file;
             }
         }
     }

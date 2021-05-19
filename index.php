@@ -22,7 +22,7 @@ if (!file_exists($autoloader)) {
 
 require $autoloader;
 
-use LSVH\WordPress\Plugin\Wpcf7CMS\Bootstrap;
+use LSVH\WordPress\Plugin\WPCF7CMS\Bootstrap;
 
 $boot = new Bootstrap(__FILE__);
 $boot->exec();

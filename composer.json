@@ -20,7 +20,8 @@
     },
     "autoload": {
         "psr-4": {
-            "LSVH\\WordPress\\Plugin\\Wpcf7CMS\\": "src/"
+            "LSVH\\WordPress\\Plugin\\WPCF7CMS\\": "src/",
+            "LSVH\\WordPress\\Plugin\\WPCF7CMS\\Tests\\": "tests/"
         }
     },
     "require-dev": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace LSVH\WordPress\Plugin\Wpcf7CMS;
+namespace LSVH\WordPress\Plugin\WPCF7CMS;
 
 abstract class Base
 {
