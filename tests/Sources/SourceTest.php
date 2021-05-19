@@ -12,7 +12,8 @@ abstract class SourceTest extends BaseTest
         self::loadWordPress();
     }
 
-    public function setUp(): void {
+    public function setUp(): void
+    {
         $this->form = \WPCF7_ContactForm::get_template();
     }
 }

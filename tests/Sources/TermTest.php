@@ -15,7 +15,7 @@ class TermTest extends SourceTest
     {
         $this->form->set_properties([
             'form' =>
-                '[select testing data:wp_term?taxonomy=' . self::TAXONOMY . '&hide_empty=0]',
+            '[select testing data:wp_term?taxonomy=' . self::TAXONOMY . '&hide_empty=0]',
         ]);
 
         $actual = $this->form->form_elements();
@@ -23,7 +23,7 @@ class TermTest extends SourceTest
         foreach (self::$terms as $term) {
             $value = self::getTermId($term);
             $label = $term['name'];
-            $this->assertStringContainsString('<option value="'.$value.'">'.$label.'</option>', $actual);
+            $this->assertStringContainsString('<option value="' . $value . '">' . $label . '</option>', $actual);
         }
     }
 }

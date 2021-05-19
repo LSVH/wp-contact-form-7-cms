@@ -29,7 +29,8 @@ class Handlers extends BaseComponent
         }, 10, 3);
     }
 
-    private static function batchRemovePrefix($needle, $haystacks) {
+    private static function batchRemovePrefix($needle, $haystacks)
+    {
         $filtered = array_filter($haystacks, function ($haystack) use ($needle) {
             return self::removePrefix($needle, $haystack) !== false;
         }, ARRAY_FILTER_USE_KEY);

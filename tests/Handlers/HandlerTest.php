@@ -2,11 +2,10 @@
 
 namespace LSVH\WordPress\Plugin\WPCF7CMS\Tests\Handlers;
 
+use LSVH\WordPress\Plugin\WPCF7CMS\Components\Handlers;
 use LSVH\WordPress\Plugin\WPCF7CMS\Tests\BaseTest;
 use LSVH\WordPress\Plugin\WPCF7CMS\Tests\Stubs\FormStub;
 use LSVH\WordPress\Plugin\WPCF7CMS\Tests\Stubs\SubmissionStub;
-
-use LSVH\WordPress\Plugin\WPCF7CMS\Components\Handlers;
 
 abstract class HandlerTest extends BaseTest
 {
@@ -21,7 +20,8 @@ abstract class HandlerTest extends BaseTest
         self::loadWordPress();
     }
 
-    public function setUp(): void {
+    public function setUp(): void
+    {
         $form = new FormStub();
         $this->submission = new SubmissionStub($form);
     }

@@ -4,6 +4,7 @@ namespace LSVH\WordPress\Plugin\WPCF7CMS\Components;
 
 use LSVH\WordPress\Plugin\WPCF7CMS\Sources\Post;
 use LSVH\WordPress\Plugin\WPCF7CMS\Sources\Term;
+use LSVH\WordPress\Plugin\WPCF7CMS\Sources\User;
 
 class Sources extends BaseComponent
 {
@@ -14,6 +15,7 @@ class Sources extends BaseComponent
         $sources = [
             'wp_post' => Post::class,
             'wp_term' => Term::class,
+            'wp_user' => User::class,
         ];
 
         add_filter('wpcf7_form_tag_data_option', function ($items, $options) use ($sources) {

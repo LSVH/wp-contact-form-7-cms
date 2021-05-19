@@ -19,7 +19,8 @@ class EditProfile extends BaseHandler
         'description' => 'description',
     ];
 
-    public function getPrefix() {
+    public function getPrefix()
+    {
         return self::PREFIX;
     }
 

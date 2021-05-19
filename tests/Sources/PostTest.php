@@ -15,7 +15,7 @@ class PostTest extends SourceTest
     {
         $this->form->set_properties([
             'form' =>
-                '[select testing data:wp_post?post_type=' . self::POST_TYPE . '&order=ASC&orderby=title]',
+            '[select testing data:wp_post?post_type=' . self::POST_TYPE . '&order=ASC&orderby=title]',
         ]);
 
         $actual = $this->form->form_elements();
@@ -23,7 +23,7 @@ class PostTest extends SourceTest
         foreach (self::$posts as $post) {
             $value = self::getPostId($post);
             $label = $post['post_title'];
-            $this->assertStringContainsString('<option value="'.$value.'">'.$label.'</option>', $actual);
+            $this->assertStringContainsString('<option value="' . $value . '">' . $label . '</option>', $actual);
         }
     }
 }
