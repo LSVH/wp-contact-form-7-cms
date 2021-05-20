@@ -9,6 +9,7 @@ use LSVH\WordPress\Plugin\WPCF7CMS\Sources\User;
 class Sources extends BaseComponent
 {
     const SEPARATOR = '?';
+    const VALUE_SEPARATOR = '|';
 
     public function install()
     {
@@ -42,6 +43,12 @@ class Sources extends BaseComponent
 
     private static function getQuery($value)
     {
-        return substr($value, strpos($value, self::SEPARATOR) + 1);
+        $url = substr($value, strpos($value, self::SEPARATOR) + 1);
+        $args = wp_parse_args($url);
+
+        return array_map(function ($arg) {
+            return strpos($arg, self::VALUE_SEPARATOR) !== false
+            ? explode(self::VALUE_SEPARATOR, $arg) : $arg;
+        }, $args);
     }
 }

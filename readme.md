@@ -86,13 +86,14 @@ The source names in the table below can be used in combination with the `data` k
 [checkboxes my-input data:<source_name>]
 ```
 
-Where `<source_name>` is one of the values from the "Source name" column from the table below. 
+Where `<source_name>` is one of the values from the "Source name" column from the table below.
+Note that using brackets (`[`, `]`) in the form tag is not supported, to separate list items use a pipe (`|`).
 
 | Source name      | Description
 |------------------|------------
-| `wp_post?<args>` | Get a list of posts, labeled with the `post_title` attribute. Customize the [query string](https://developer.wordpress.org/reference/functions/wp_parse_args/) `<args>` using any [WP_Query parameter](https://developer.wordpress.org/reference/classes/wp_query/#parameters) that doesn't require square brackets (`[`, `]`). For example to get a list of all pages you can use `[select my-input data:wp_post?post_type=page]`.
-| `wp_term?<args>` | Get a list of terms, labeled with the `name` attribute. Customize the [query string](https://developer.wordpress.org/reference/functions/wp_parse_args/) `<args>` using any [WP_Term_Query parameter](https://developer.wordpress.org/reference/classes/wp_term_query/__construct/#parameters) that doesn't require square brackets (`[`, `]`). For example to get a list of all categories you can use `[select my-input data:wp_term?taxonomy=category]`.
-| `wp_user?<args>` | Get a list of users, labeled with the `user_login` attribute. Customize the [query string](https://developer.wordpress.org/reference/functions/wp_parse_args/) `<args>` using any [WP_User_Query parameter](https://developer.wordpress.org/reference/classes/WP_User_Query/prepare_query/#parameters) that doesn't require square brackets (`[`, `]`). For example to get a list of all subscribers you can use `[select my-input data:wp_user?role=subscriber]`.
+| `wp_post?<args>` | Get a list of posts, labeled with the `post_title` attribute. Customize the [query string](https://developer.wordpress.org/reference/functions/wp_parse_args/) `<args>` using any [WP_Query parameter](https://developer.wordpress.org/reference/classes/wp_query/#parameters). For example to get a list of all pages you can use `[select my-input data:wp_post?post_type=page]`.
+| `wp_term?<args>` | Get a list of terms, labeled with the `name` attribute. Customize the [query string](https://developer.wordpress.org/reference/functions/wp_parse_args/) `<args>` using any [WP_Term_Query parameter](https://developer.wordpress.org/reference/classes/wp_term_query/__construct/#parameters). For example to get a list of all categories you can use `[select my-input data:wp_term?taxonomy=category]`.
+| `wp_user?<args>` | Get a list of users, labeled with the `user_login` attribute. Customize the [query string](https://developer.wordpress.org/reference/functions/wp_parse_args/) `<args>` using any [WP_User_Query parameter](https://developer.wordpress.org/reference/classes/WP_User_Query/prepare_query/#parameters). For example to get a list of all subscribers you can use `[select my-input data:wp_user?role=subscriber]`.
 
 #### Default values
 

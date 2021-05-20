@@ -4,6 +4,8 @@ namespace LSVH\WordPress\Plugin\WPCF7CMS\Tests\Sources;
 
 class TermTest extends SourceTest
 {
+    const OPTION = 'data:wp_term' . self::SEPARATOR;
+
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
@@ -13,17 +15,15 @@ class TermTest extends SourceTest
     /** @test */
     public function by_taxonomy()
     {
-        $this->form->set_properties([
-            'form' =>
-            '[select testing data:wp_term?taxonomy=' . self::TAXONOMY . '&hide_empty=0]',
-        ]);
+        $args = 'taxonomy=' . self::TAXONOMY . '&hide_empty=0';
+        $this->addSelectToForm(self::OPTION . $args);
 
         $actual = $this->form->form_elements();
 
         foreach (self::$terms as $term) {
             $value = self::getTermId($term);
             $label = $term['name'];
-            $this->assertStringContainsString('<option value="' . $value . '">' . $label . '</option>', $actual);
+            $this->containsSelectOption($value, $label, $actual);
         }
     }
 }

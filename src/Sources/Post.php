@@ -4,7 +4,7 @@ namespace LSVH\WordPress\Plugin\WPCF7CMS\Sources;
 
 class Post extends BaseSource
 {
-    public function query($args = '')
+    public function query($args)
     {
         $posts = [];
 

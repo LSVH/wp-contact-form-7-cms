@@ -7,27 +7,29 @@ use LSVH\WordPress\Plugin\WPCF7CMS\Handlers\EditProfile;
 final class EditProfileTest extends HandlerTest
 {
     const PREFIX = self::BASE_PREFIX . EditProfile::PREFIX;
-    const META_KEY = 'test';
+
+    protected static $testString = 'foo';
+    protected static $testArray = ['foo', 'bar'];
+    protected static $testUser;
 
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
-        self::loadTestUser();
-    }
-
-    public function tearDown(): void
-    {
-        $this->resetTestUser();
+        self::$testUser = self::$users[0];
+        self::loadUsers();
+        self::loadUserMeta(self::$testUser);
     }
 
     /**
      * @test
-     * @dataProvider user_fields
+     * @dataProvider userValues
      */
-    public function can_update_user_field($field, $expected = 'foo')
+    public function can_update_user_field($field, $expected = null)
     {
-        $field = $field;
+        $this->resetUser(self::$testUser);
+        $this->resetUserMeta(self::$testUser);
         $posted_data = [];
+        $expected = empty($expected) ? self::$testString : $expected;
         $expected = $posted_data[self::PREFIX . $field] = $expected;
         $this->submission->set_posted_data($posted_data);
 
@@ -40,28 +42,13 @@ final class EditProfileTest extends HandlerTest
         $this->assertEquals($actual, $expected);
     }
 
-    public function user_fields()
-    {
-        return [
-            'nicename' => ['nicename'],
-            'url' => ['url', 'http://foo.bar'],
-            'email' => ['email', 'foo@bar.com'],
-            'display_name' => ['display_name'],
-            'nickname' => ['nickname'],
-            'first_name' => ['first_name'],
-            'last_name' => ['last_name'],
-            'description' => ['description'],
-            'meta (string value)' => [self::META_PREFIX . self::META_KEY],
-            'meta (array value)' => [self::META_PREFIX . self::META_KEY, ['foo', 'bar']],
-        ];
-    }
-
     /** @test */
     public function can_update_user_pass()
     {
+        $this->resetUserPass(self::$testUser);
         $field = EditProfile::PASS_KEY;
         $posted_data = [];
-        $expected = $posted_data[self::PREFIX . $field] = 'foo';
+        $expected = $posted_data[self::PREFIX . $field] = self::$testString;
         $this->submission->set_posted_data($posted_data);
 
         $actual = $this->getFromCurrentUser($field);
@@ -73,33 +60,42 @@ final class EditProfileTest extends HandlerTest
         $this->assertTrue(wp_check_password($expected, $actual));
     }
 
-    private function resetTestUser()
+    public function userValues()
     {
-        $id = username_exists(self::USERNAME);
-        $user = [
-            'ID' => $id,
-            'user_nicename' => '',
-            'user_url' => '',
-            'user_email' => '',
-            'display_name' => '',
-            'nickname' => '',
-            'first_name' => '',
-            'last_name' => '',
-            'description' => '',
+        $user_values = [
+            'nicename' => ['nicename'],
+            'url' => ['url', 'http://foo.bar'],
+            'email' => ['email', 'foo@bar.com'],
+            'display_name' => ['display_name'],
+            'nickname' => ['nickname'],
+            'first_name' => ['first_name'],
+            'last_name' => ['last_name'],
+            'description' => ['description'],
         ];
-        wp_update_user($user);
-        wp_set_password(self::PASSWORD, $id);
-        update_user_meta($id, self::META_KEY, '');
+
+        $user_meta_values = [];
+        foreach (self::$meta as $item) {
+            $key = $item['key'];
+            $value = is_array($item['value']) ? self::$testArray : self::$testString;
+            $user_meta_values['meta: "'.$key.'"'] = [self::META_PREFIX . $key, $value];
+        }
+
+        return array_merge($user_values, $user_meta_values);
     }
 
     private function getFromCurrentUser($field)
     {
         $this->reloadCurrentUser();
         $user = wp_get_current_user();
+        $user_values = $user->to_array();
 
-        $fields = array_merge($user->to_array(), [
-            self::META_PREFIX . self::META_KEY => get_user_meta($user->ID, self::META_KEY, true),
-        ]);
+        $user_meta_values = [];
+        foreach (self::$meta as $item) {
+            $key = $item['key'];
+            $user_meta_values[self::META_PREFIX . $key] = get_user_meta($user->ID, $key, true);
+        }
+
+        $values = array_merge($user_values, $user_meta_values);
 
         $mappedFields = array_merge(EditProfile::$fieldMapping, [
             EditProfile::PASS_KEY => 'user_pass',
@@ -108,13 +104,13 @@ final class EditProfileTest extends HandlerTest
             $field = $mappedFields[$field];
         }
 
-        return array_key_exists($field, $fields) ? $fields[$field] : $user->$field;
+        return array_key_exists($field, $values) ? $values[$field] : $user->$field;
     }
 
     private function reloadCurrentUser()
     {
         global $current_user;
         $current_user = null;
-        wp_set_current_user(null, self::USERNAME);
+        self::setCurrentUser(self::$testUser);
     }
 }
